@@ -17,6 +17,16 @@
     <div class="caixa-login">
         <h2 style="text-align: center; margin-bottom: 30px;">Sistema de Controle de Serviços</h2>
         
+        
+        <?php if(isset($mensagem_erro) && $mensagem_erro != "") { ?>
+            <div style="background-color: #ffcccc; color: red; padding: 10px; margin-bottom: 15px; border: 1px solid red; text-align: center;">
+                <?php echo $mensagem_erro; ?>
+            </div>
+        <?php } ?>
+        
+        
+        <form action="index.php?rota=logar" method="POST">
+        
     
         <form action="index.php?rota=logar" method="POST">
             
