@@ -25,6 +25,9 @@
 
     <div class="conteudo">
         <h2>Lista de Serviços</h2>
+
+        <a href="index.php?rota=novo_servico" style="background: #5cb85c; color: white; padding: 8px 15px; text-decoration: none;">+ Novo Serviço</a>
+        
         <hr>
         <table style="width: 100%; border-collapse: collapse; margin-top: 20px;" border="1">
             <tr style="background-color: #eee; text-align: left;">

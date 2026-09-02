@@ -39,7 +39,17 @@ if ($rota_atual == 'login') {
     header("Location: index.php?rota=login");
     exit;
 
-} else {
+} elseif ($rota_atual == 'novo_servico') {
+    
+    $controlador = new ServicoController();
+    $controlador->exibirTelaCadastro();
+
+} elseif ($rota_atual == 'salvar_servico') {
+
+    $controlador = new ServicoController();
+    $controlador->salvarNovo();
+
+}else {
     echo "<h3>Página não encontrada!</h3>";
 }
 ?>
