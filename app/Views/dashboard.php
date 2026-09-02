@@ -26,7 +26,40 @@
     <div class="conteudo">
         <h2>Lista de Serviços</h2>
         <hr>
-        <p>Aqui nós vamos colocar a tabela com as ordens de serviço daqui a pouco!</p>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;" border="1">
+            <tr style="background-color: #eee; text-align: left;">
+                <th style="padding: 10px;">ID</th>
+                <th style="padding: 10px;">Cliente</th>
+                <th style="padding: 10px;">Placa</th>
+                <th style="padding: 10px;">Valor (R$)</th>
+                <th style="padding: 10px;">Data</th>
+                <th style="padding: 10px;">Ações</th>
+            </tr>
+            
+            <?php 
+            
+            if (empty($lista_servicos)) {
+                echo "<tr><td colspan='6' style='padding: 10px; text-align: center;'>Nenhum serviço cadastrado ainda.</td></tr>";
+            } else {
+                
+                foreach ($lista_servicos as $servico) {
+            ?>
+                <tr>
+                    <td style="padding: 10px;"><?php echo $servico['id_service']; ?></td>
+                    <td style="padding: 10px;"><?php echo $servico['name_client']; ?></td>
+                    <td style="padding: 10px;"><?php echo $servico['car_plate']; ?></td>
+                    <td style="padding: 10px;"><?php echo number_format($servico['price'], 2, ',', '.'); ?></td>
+                    <td style="padding: 10px;"><?php echo date('d/m/Y', strtotime($servico['date'])); ?></td>
+                    <td style="padding: 10px;">
+                        
+                        <button>Finalizar</button>
+                    </td>
+                </tr>
+            <?php 
+                }
+            } 
+            ?>
+        </table>
     </div>
 
 </body>
