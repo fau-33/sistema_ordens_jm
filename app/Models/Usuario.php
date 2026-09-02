@@ -1,27 +1,31 @@
 <?php
-// app/Models/Usuario.php
+
 
 require_once __DIR__ . '/../../config/banco.php';
 
 class Usuario {
-    private $conexao;
+    
+    
+    public function checarLogin($email, $senha) {
+        $db = new BancoDados();
+        $conexao = $db->conectar();
 
-    public function __construct() {
-        $banco = new BancoDados();
-        $this->conexao = $banco->conectar();
-    }
-
-    public function validarLogin($email_digitado, $senha_digitada) {
         
-        $sql = "SELECT * FROM user WHERE email = :email AND password = :senha LIMIT 1";
+        $sql = "SELECT * FROM user WHERE email = :e AND password = :s LIMIT 1";
         
-        $stmt = $this->conexao->prepare($sql);
-        $stmt->execute([
-            ':email' => $email_digitado,
-            ':senha' => $senha_digitada
-        ]);
+        $comando = $conexao->prepare($sql);
+        $comando->bindValue(':e', $email);
+        $comando->bindValue(':s', $senha);
+        $comando->execute();
 
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $dados = $comando->fetch(PDO::FETCH_ASSOC);
+
+        
+        if ($dados) {
+            return $dados;
+        } else {
+            return false;
+        }
     }
 }
 ?>

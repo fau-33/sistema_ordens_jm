@@ -24,10 +24,21 @@ if ($rota_atual == 'login') {
     $controlador->exibirTela();
     
 } elseif ($rota_atual == 'logar') {
-    
+
     $controlador = new LoginController();
     $controlador->fazerLogin();
     
+} elseif ($rota_atual == 'dashboard') {
+    
+    $controlador = new DashboardController();
+    $controlador->abrirPainel();
+
+} elseif ($rota_atual == 'sair') {
+    
+    session_destroy();
+    header("Location: index.php?rota=login");
+    exit;
+
 } else {
     echo "<h3>Página não encontrada!</h3>";
 }
