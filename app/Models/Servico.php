@@ -37,5 +37,27 @@ class Servico {
     $comando->execute();
 }
 
+  public function buscarPorId($id) {
+        $db = new BancoDados();
+        $conexao = $db->conectar();
+
+        $sql = "SELECT * FROM service WHERE id_service = :id LIMIT 1";
+        $comando = $conexao->prepare($sql);
+        $comando->bindValue(':id', $id);
+        $comando->execute();
+        
+        return $comando->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function finalizarServico($id) {
+        $db = new BancoDados();
+        $conexao = $db->conectar();
+
+        $sql = "UPDATE service SET status = 'Finalizado' WHERE id_service = :id";
+        $comando = $conexao->prepare($sql);
+        $comando->bindValue(':id', $id);
+        $comando->execute();
+    }
+
 }
 ?>

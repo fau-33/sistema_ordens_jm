@@ -49,6 +49,11 @@ if ($rota_atual == 'login') {
     $controlador = new ServicoController();
     $controlador->salvarNovo();
 
+}elseif ($rota_atual == 'finalizar') {
+    
+$controlador = new ServicoController();
+$controlador->finalizarServico();
+
 }else {
     echo "<h3>Página não encontrada!</h3>";
 }

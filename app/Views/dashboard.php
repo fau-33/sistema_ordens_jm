@@ -55,8 +55,16 @@
                     <td style="padding: 10px;"><?php echo date('d/m/Y', strtotime($servico['date'])); ?></td>
                     <td style="padding: 10px;">
                         
-                        <button>Finalizar</button>
+                    <td style="padding: 10px;">
+                       <?php echo $servico['status']; ?>
                     </td>
+                 <td style="padding: 10px;">
+                 <?php if ($servico['status'] == 'Pendente') { ?>
+                <a href="index.php?rota=finalizar&id=<?php echo $servico['id_service']; ?>" style="background: #0275d8; color: white; padding: 5px 10px; text-decoration: none;">Finalizar</a>
+                  <?php } else { ?>
+                  <span style="color: green;">Concluído</span>
+              <?php } ?>
+                   </td>
                 </tr>
             <?php 
                 }
