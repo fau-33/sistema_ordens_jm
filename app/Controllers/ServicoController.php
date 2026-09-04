@@ -22,11 +22,11 @@ class ServicoController {
         $valor = $_POST['valor'] ?? '';
 
         
-        $valor_formatado = str_replace(',', '.', $valor);
+        $valor_final = str_replace(',', '.', $valor);
 
         
         $model = new Servico();
-        $model->cadastrarServico($cliente, $placa, $valor_formatado);
+        $model->cadastrarServico($cliente, $placa, $valor_final);
 
         
         header("Location: index.php?rota=dashboard");
