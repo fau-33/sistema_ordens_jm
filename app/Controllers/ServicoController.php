@@ -5,7 +5,7 @@ require_once 'app/Models/Servico.php';
 
 class ServicoController {
     
-   
+   // Exibe a tela de cadastro de serviços, garantindo que o usuário esteja logado
     public function exibirTelaCadastro() {
         if (!isset($_SESSION['usuario_id'])) {
             header("Location: index.php?rota=login");
@@ -14,7 +14,7 @@ class ServicoController {
         require_once 'app/Views/cadastro_servico.php';
     }
 
-    
+    // Salva um novo serviço no banco de dados e redireciona para o dashboard
     public function salvarNovo() {
         
         $cliente = $_POST['cliente'] ?? '';
@@ -33,6 +33,7 @@ class ServicoController {
         exit;
     }
     
+    // Finaliza um serviço, calcula a comissão e envia um e-mail de notificação
     public function finalizarServico() {
         
         $id_servico = $_GET['id'] ?? 0;
@@ -47,13 +48,17 @@ class ServicoController {
                 $comissao = 0;
 
                 
-                if ($valor <= 500) {
-                    $comissao = $valor * 0.05; // 5%
-                } elseif ($valor > 500 && $valor <= 1500) {
-                    $comissao = $valor * 0.10; // 10%
+                // Calcula a comissão conforme as regras de negócio:
+                // - Até R$ 1.000,00: 5%
+                // - Acima de R$ 1.000,00 e até R$ 10.000,00: 10%
+                // - Acima de R$ 10.000,00: 20%
+                if ($valor <= 1000) {
+                    $comissao = $valor * 0.05;
+                } elseif ($valor > 1000 && $valor <= 10000) {
+                    $comissao = $valor * 0.10;
                 } else {
-                    $comissao = $valor * 0.20; // 20%
-                }
+                    $comissao = $valor * 0.20;
+         }
 
                 
                 $model->finalizarServico($id_servico);
@@ -68,7 +73,7 @@ class ServicoController {
                 
                 $cabecalhos = "From: sistema@jminformatica.com";
 
-                
+                // Envia o e-mail de notificação
                 @mail($para, $assunto, $mensagem, $cabecalhos);
             }
         }

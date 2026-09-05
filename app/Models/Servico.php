@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../config/banco.php';
 
 class Servico {
     
-    
+    // Função responsável por listar todos os serviços cadastrados no banco de dados
     public function listarTodos() {
         $db = new BancoDados();
         $conexao = $db->conectar();
@@ -17,6 +17,7 @@ class Servico {
         
         return $comando->fetchAll(PDO::FETCH_ASSOC);
     }
+    // Função responsável por cadastrar um novo serviço no banco com status inicial 'Pendente'
    public function cadastrarServico($nome_cliente, $placa, $valor) {
     $db = new BancoDados();
     $conexao = $db->conectar();
@@ -37,6 +38,7 @@ class Servico {
     $comando->execute();
 }
 
+// Função responsável por buscar um serviço específico pelo ID
   public function buscarPorId($id) {
         $db = new BancoDados();
         $conexao = $db->conectar();
@@ -48,7 +50,7 @@ class Servico {
         
         return $comando->fetch(PDO::FETCH_ASSOC);
     }
-
+   // Atualiza o status do serviço para 'Finalizado' baseado no ID informado
     public function finalizarServico($id) {
         $db = new BancoDados();
         $conexao = $db->conectar();

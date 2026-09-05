@@ -1,5 +1,8 @@
 <?php
 
+// Roteador principal do sistema. 
+// Recebe o parâmetro 'rota' via GET e decide qual Controller chamar.
+
 session_start();
 
 
